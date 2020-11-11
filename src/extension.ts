@@ -62,52 +62,74 @@ function moveCursor(
   editor.revealRange(new vscode.Range(newPosition, newPosition));
 }
 
+enum ParagraphJumpOperation {
+  moveUp = 0,
+  moveDown = 1,
+  selectUp = 2,
+  selectDown = 3,
+}
+
+function performParagraphJumpOperation(
+  editor: vscode.TextEditor,
+  op: ParagraphJumpOperation
+) {
+  switch (op) {
+    case ParagraphJumpOperation.moveUp:
+    case ParagraphJumpOperation.selectUp:
+      {
+        const targetLine = getNextLine(editor, LineOperation.up);
+        const newPosition = new vscode.Position(targetLine.lineNumber, 0);
+        const moveOp =
+          op === ParagraphJumpOperation.moveUp
+            ? MoveOperation.move
+            : MoveOperation.select;
+        moveCursor(editor, newPosition, moveOp);
+      }
+      break;
+    case ParagraphJumpOperation.moveDown:
+    case ParagraphJumpOperation.selectDown:
+      {
+        const targetLine = getNextLine(editor, LineOperation.down);
+        const newPosition = new vscode.Position(
+          targetLine.lineNumber,
+          targetLine.text.length
+        );
+        const moveOp =
+          op === ParagraphJumpOperation.moveDown
+            ? MoveOperation.move
+            : MoveOperation.select;
+        moveCursor(editor, newPosition, moveOp);
+      }
+      break;
+  }
+}
+
 export function activate(context: vscode.ExtensionContext) {
   let paragraphJumpUp = vscode.commands.registerTextEditorCommand(
     "paragraphjump.up",
     (editor: vscode.TextEditor) => {
-      const targetLine: vscode.TextLine = getNextLine(editor, LineOperation.up);
-      const newPosition = new vscode.Position(targetLine.lineNumber, 0);
-      moveCursor(editor, newPosition, MoveOperation.move);
+      performParagraphJumpOperation(editor, ParagraphJumpOperation.moveUp);
     }
   );
 
   let paragraphJumpDown = vscode.commands.registerTextEditorCommand(
     "paragraphjump.down",
     (editor: vscode.TextEditor) => {
-      const targetLine: vscode.TextLine = getNextLine(
-        editor,
-        LineOperation.down
-      );
-      const newPosition = new vscode.Position(
-        targetLine.lineNumber,
-        targetLine.text.length
-      );
-      moveCursor(editor, newPosition, MoveOperation.move);
+      performParagraphJumpOperation(editor, ParagraphJumpOperation.moveDown);
     }
   );
 
   let paragraphSelectUp = vscode.commands.registerTextEditorCommand(
     "paragraphjump.selectup",
     (editor: vscode.TextEditor) => {
-      const targetLine: vscode.TextLine = getNextLine(editor, LineOperation.up);
-      const newPosition = new vscode.Position(targetLine.lineNumber, 0);
-      moveCursor(editor, newPosition, MoveOperation.select);
+      performParagraphJumpOperation(editor, ParagraphJumpOperation.selectUp);
     }
   );
 
   let paragraphSelectDown = vscode.commands.registerTextEditorCommand(
     "paragraphjump.selectdown",
     (editor: vscode.TextEditor) => {
-      const targetLine: vscode.TextLine = getNextLine(
-        editor,
-        LineOperation.down
-      );
-      const newPosition = new vscode.Position(
-        targetLine.lineNumber,
-        targetLine.text.length
-      );
-      moveCursor(editor, newPosition, MoveOperation.select);
+      performParagraphJumpOperation(editor, ParagraphJumpOperation.selectDown);
     }
   );
 
