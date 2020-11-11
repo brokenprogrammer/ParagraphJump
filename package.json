@@ -2,7 +2,7 @@
 	"name": "paragraphjump",
 	"displayName": "ParagraphJump",
 	"description": "Allows the user to navigate swiftly between paragraphs",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"publisher": "brokenprogrammer",
 	"repository": {
 		"type": "git",

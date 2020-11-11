@@ -1,14 +1,26 @@
 import * as vscode from "vscode";
 
-const targetLineIsEmptyOrWhitespace = (
-  line: number,
-  document: vscode.TextDocument
-) => !document.lineAt(line).isEmptyOrWhitespace;
-
 enum LineOperation {
   up = 0,
   down = 1,
 }
+
+enum MoveOperation {
+  move = 0,
+  select = 1,
+}
+
+enum ParagraphJumpOperation {
+  moveUp = 0,
+  moveDown = 1,
+  selectUp = 2,
+  selectDown = 3,
+}
+
+const targetLineIsEmptyOrWhitespace = (
+  line: number,
+  document: vscode.TextDocument
+) => !document.lineAt(line).isEmptyOrWhitespace;
 
 function getNextLine(editor: vscode.TextEditor, op: LineOperation) {
   let document = editor.document;
@@ -34,11 +46,6 @@ function getNextLine(editor: vscode.TextEditor, op: LineOperation) {
   return document.lineAt(line);
 }
 
-enum MoveOperation {
-  move = 0,
-  select = 1,
-}
-
 function moveCursor(
   editor: vscode.TextEditor,
   newPosition: vscode.Position,
@@ -53,20 +60,13 @@ function moveCursor(
       break;
     case MoveOperation.select:
       {
-        let anchor = editor.selection.anchor;
+        const anchor = editor.selection.anchor;
         newCursorPosition = new vscode.Selection(anchor, newPosition);
       }
       break;
   }
   editor.selection = newCursorPosition;
   editor.revealRange(new vscode.Range(newPosition, newPosition));
-}
-
-enum ParagraphJumpOperation {
-  moveUp = 0,
-  moveDown = 1,
-  selectUp = 2,
-  selectDown = 3,
 }
 
 function performParagraphJumpOperation(
