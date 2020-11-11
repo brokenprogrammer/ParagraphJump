@@ -4,11 +4,24 @@
 	"description": "Allows the user to navigate swiftly between paragraphs",
 	"version": "0.0.1",
 	"publisher": "brokenprogrammer",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/brokenprogrammer/ParagraphJump"
+	},
+	"homepage": "https://github.com/brokenprogrammer/ParagraphJump",
+	"bugs": {
+		"url": "https://github.com/brokenprogrammer/ParagraphJump/issues"
+	},
 	"engines": {
 		"vscode": "^1.51.0"
 	},
 	"categories": [
 		"Other"
+	],
+	"keywords": [
+		"navigation",
+		"keybindings",
+		"travel"
 	],
 	"activationEvents": [
 		"onCommand:paragraphjump.up",

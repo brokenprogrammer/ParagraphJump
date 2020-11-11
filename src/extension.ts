@@ -6,8 +6,8 @@ const targetLineIsEmptyOrWhitespace = (
 ) => !document.lineAt(line).isEmptyOrWhitespace;
 
 enum LineOperation {
-  Up = 1,
-  Down = 2,
+  up = 1,
+  down = 2,
 }
 
 function getNextLine(editor: vscode.TextEditor, op: LineOperation) {
@@ -15,13 +15,13 @@ function getNextLine(editor: vscode.TextEditor, op: LineOperation) {
   let line = editor.selection.active.line;
 
   switch (op) {
-    case LineOperation.Up:
+    case LineOperation.up:
       {
         while (line > 0 && targetLineIsEmptyOrWhitespace(--line, document)) {}
       }
       break;
 
-    case LineOperation.Down:
+    case LineOperation.down:
       {
         while (
           line < document.lineCount - 1 &&
@@ -44,7 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
   let paragraphJumpUp = vscode.commands.registerTextEditorCommand(
     "paragraphjump.up",
     (editor: vscode.TextEditor) => {
-      let targetLine: vscode.TextLine = getNextLine(editor, LineOperation.Up);
+      let targetLine: vscode.TextLine = getNextLine(editor, LineOperation.up);
       const newPosition = new vscode.Position(targetLine.lineNumber, 0);
       moveCursor(editor, newPosition);
     }
@@ -53,7 +53,7 @@ export function activate(context: vscode.ExtensionContext) {
   let paragraphJumpDown = vscode.commands.registerTextEditorCommand(
     "paragraphjump.down",
     (editor: vscode.TextEditor) => {
-      let targetLine: vscode.TextLine = getNextLine(editor, LineOperation.Down);
+      let targetLine: vscode.TextLine = getNextLine(editor, LineOperation.down);
       const newPosition = new vscode.Position(targetLine.lineNumber, 0);
       moveCursor(editor, newPosition);
     }
