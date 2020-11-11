@@ -2,8 +2,14 @@
 
 All notable changes to the "paragraphjump" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 1.0.0
 
-## [Unreleased]
+### Added
 
-- Initial release
+- Added support for selecting paragraphs up and down.
+
+## 0.0.1
+
+### Added
+
+- Initial release with only jump up and down functionality.

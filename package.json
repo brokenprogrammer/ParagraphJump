@@ -2,7 +2,7 @@
 	"name": "paragraphjump",
 	"displayName": "ParagraphJump",
 	"description": "Allows the user to navigate swiftly between paragraphs",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"publisher": "brokenprogrammer",
 	"repository": {
 		"type": "git",
@@ -25,7 +25,9 @@
 	],
 	"activationEvents": [
 		"onCommand:paragraphjump.up",
-		"onCommand:paragraphjump.down"
+		"onCommand:paragraphjump.down",
+		"onCommand:paragraphjump.selectup",
+		"onCommand:paragraphjump.selectdown"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -37,6 +39,14 @@
 			{
 				"command": "paragraphjump.down",
 				"title": "ParagraphJump: Down"
+			},
+			{
+				"command": "paragraphjump.selectup",
+				"title": "ParagraphJump: Select Up"
+			},
+			{
+				"command": "paragraphjump.selectdown",
+				"title": "ParagraphJump: Select Down"
 			}
 		]
 	},
