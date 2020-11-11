@@ -19,4 +19,4 @@ None at the time.
 
 ### 0.0.1
 
-Initial release including move up and down features.
+Initial release including move up and down features
