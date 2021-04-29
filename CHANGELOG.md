@@ -2,6 +2,12 @@
 
 All notable changes to the "paragraphjump" extension will be documented in this file.
 
+## 1.0.1
+
+### Updated
+
+- Updated npm packages.
+
 ## 1.0.0
 
 ### Added
