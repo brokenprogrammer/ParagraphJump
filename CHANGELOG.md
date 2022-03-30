@@ -2,6 +2,13 @@
 
 All notable changes to the "paragraphjump" extension will be documented in this file.
 
+## Unreleased
+
+### Updated
+
+- Bump minimist from 1.2.5 to 1.2.6.
+- Bump ansi-regex from 3.0.0 to 3.0.1.
+
 ## 1.1.0
 
 ### Updated

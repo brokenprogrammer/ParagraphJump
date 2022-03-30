@@ -43,16 +43,6 @@ My personal bindings for this plugin is displayed below as an example:
     }
 ```
 
-## Known Issues
+## Changelog
 
-None at the time.
-
-## Release Notes
-
-### 1.0.0
-
-First full release with all the intended functionality for the plugin.
-
-### 0.0.1
-
-Initial release including move up and down features
+The changelog can be viewed [here](CHANGELOG.md).
